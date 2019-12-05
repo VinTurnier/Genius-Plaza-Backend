@@ -54,4 +54,41 @@ class User(AbstractBaseUser,PermissionsMixin):
         :return: full_name
         '''
         return self.full_name()
+    
+
+class Step(models.Model):
+    ''' ORM model to represent the recipe steps'''
+    step_text = models.CharField(max_length=255,null=False)
+    recipe = models.ForeignKey('Recipe',related_name='steps',on_delete=models.CASCADE)
+
+    def __str__(self):
+        ''' returns the string representation of the object
+        
+        :return: step_text
+        '''
+        return self.step_text
+
+class Ingredient(models.Model):
+    ''' ORM model to represent the recipe ingredients'''
+    text = models.CharField(max_length=255,null=False)
+    recipe = models.ForeignKey('Recipe',related_name='ingredients',on_delete=models.CASCADE)
+
+    def __str__(self):
+        ''' returns the string representation of the object
+        
+        :return: text
+        '''
+        return self.text
+    
+class Recipe(models.Model):
+    ''' ORM model to represent recipe table '''
+    name = models.CharField(max_length=255,null=False)
+    user = models.ForeignKey('User',related_name='recipes',on_delete=models.CASCADE)
+
+    def __str__(self):
+        ''' returns the string representation of the object
+        
+        :return: name
+        '''
+        return self.name
 

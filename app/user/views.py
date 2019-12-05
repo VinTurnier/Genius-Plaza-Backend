@@ -17,3 +17,4 @@ class UserSingleViewSet(generics.RetrieveUpdateDestroyAPIView):
     queryset = get_user_model().objects.all()
     serializer_class = SingleUserSerializer
 
+
