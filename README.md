@@ -1,7 +1,7 @@
 Recipe App For Genius Place
 ===
 
-Thank you for your cosidaration and the oportunity to take this challenge. I do hope you are pleased with me work and look forward to hearing your feedback. 
+Thank you for your consideration and the opportunity to take this challenge. I do hope you are pleased with me work and look forward to hearing your feedback. 
 
 # Folder Structure
 - The `core` directory contains the models
