@@ -3,7 +3,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 
 # Local Application Imports
-from core.models import User
+from core.models import User, Recipe, Ingredient, Step
 
 class UserAdmin(BaseUserAdmin):
     ''' User Admin field management'''
@@ -26,3 +26,6 @@ class UserAdmin(BaseUserAdmin):
 
 ''' register admin site models'''
 admin.site.register(User,UserAdmin)
+admin.site.register(Recipe)
+admin.site.register(Ingredient)
+admin.site.register(Step)
