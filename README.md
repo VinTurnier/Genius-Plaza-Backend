@@ -20,7 +20,11 @@ I've also included a couple model test, simply run:
 ```s
 $ docker-compose run app sh -c "python manage.py test"
 ```
-Just a couple test cases to test the model relationships
+Just a couple test cases to test the model relationships. I've also added a couple postman test cases for sanity check that the apis are actually working. Run the collection by doing:
+```s
+$ newman run Genius-Plaza-Backend.postman_collection.json
+```
+Make sure that the server is running before trying out these test cases
 
 # Confusions
 There was one thing that I was a little confused about. For the recipe orm model, the task asked to create a one to one relationship with user, which means that for one user there exists only one recipe. Yet on the API section there is one task that says get recipes by particular user. In this case I followed the API, and made a One to Many relationship between user and recipe. As that would be the simplest way to complete that task.

@@ -6,6 +6,6 @@ from user.views import UserViewSet, UserSingleViewSet
 app_name = 'user'
 
 urlpatterns = [
-    path('user/',UserViewSet.as_view(),name='users'),
-    path('user/<int:pk>',UserSingleViewSet.as_view(),name='user')
+    path('users/',UserViewSet.as_view(),name='users'),
+    path('users/<int:pk>',UserSingleViewSet.as_view(),name='users')
 ]

@@ -1,0 +1,354 @@
+{
+	"info": {
+		"_postman_id": "9804bf2c-c5fe-4817-aef7-14c3516ba307",
+		"name": "Genius-Plaza-Backend",
+		"description": "backend api for recipe app",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get Users",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1f1cc5dc-8acb-46e0-88c2-7f8ad7fe6f49",
+						"exec": [
+							"const jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"Atleast 1 user in Database\", function () {",
+							"    pm.expect(jsonData[0].id).to.eql(1);",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://0.0.0.0:8000/api/users/",
+					"protocol": "http",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"users",
+						""
+					]
+				},
+				"description": "gets the users created in the recipe app database"
+			},
+			"response": []
+		},
+		{
+			"name": "Post new User",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4c1d1ecd-7306-42c8-a2ca-826e7dab5b01",
+						"exec": [
+							"const jsonData = pm.response.json();",
+							"pm.globals.set(\"user_id\",jsonData.id);",
+							"",
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([201,202]);",
+							"});",
+							"",
+							"pm.test(\"Your test name\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.first_name).to.eql(\"test\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\":\"somet{{$randomInt}}hing{{$randomInt}}\",\n\t\"email\": \"something{{$randomInt}}@example{{$randomInt}}.com\",\n\t\"first_name\":\"test\",\n\t\"last_name\":\"user\",\n\t\"password\":\"password\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://0.0.0.0:8000/api/users/",
+					"protocol": "http",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"users",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Recipes",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e376c63e-e380-4997-a447-d8f6352c1831",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://0.0.0.0:8000/api/recipes",
+					"protocol": "http",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"recipes"
+					]
+				},
+				"description": "get all the recipes"
+			},
+			"response": []
+		},
+		{
+			"name": "Post Recipe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a5b97383-fc42-462c-94d1-c5ebf484839f",
+						"exec": [
+							"const jsonData = pm.response.json();",
+							"pm.globals.set(\"recipe_id\", jsonData.id);",
+							"",
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([201,202]);",
+							"});",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Test Cookie\",\n    \"ingredients\": [\n        {\n            \"text\": \"cookie dough\"\n        },\n        {\n            \"text\": \"Milk\"\n        }\n        \n    ],\n    \"steps\": [\n        {\n            \"step_text\": \"open the cookie dough\"\n        },\n        {\n            \"step_text\": \"add milk\"\n        }\n    ],\n    \"user_id\":{{user_id}}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://0.0.0.0:8000/api/recipes/",
+					"protocol": "http",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"recipes",
+						""
+					]
+				},
+				"description": "create a new recipe with no ingredients and steps"
+			},
+			"response": []
+		},
+		{
+			"name": "Get User with Recipes",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1e9b9a2b-be0e-45ca-9f3c-f1efff25cdd8",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://0.0.0.0:8000/api/users/{{user_id}}",
+					"protocol": "http",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"users",
+						"{{user_id}}"
+					]
+				},
+				"description": "gets a user and displays all the recipes"
+			},
+			"response": []
+		},
+		{
+			"name": "Update Recipe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "cb3db7dd-2c78-4a78-9198-220bac712638",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": {{recipe_id}},\n    \"name\": \"Test Cookie\",\n    \"ingredients\": [\n        {\n            \"text\": \"cookie dough\"\n        },\n        {\n            \"text\": \"{{$randomInt}} bottles Milk\"\n        },\n        {\n            \"text\": \"{{$randomInt}} bottles of Ketchup\"\n        }\n        \n    ],\n    \"steps\": [\n        {\n            \"step_text\": \"open the cookie dough\"\n        },\n        {\n            \"step_text\": \"drink all the milk\"\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://0.0.0.0:8000/api/recipes/{{recipe_id}}",
+					"protocol": "http",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"recipes",
+						"{{recipe_id}}"
+					]
+				},
+				"description": "this updates the recipe, name, steps or ingredients"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Recipe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "41822a4a-ec4c-4448-8f77-9785d071e033",
+						"exec": [
+							"pm.test(\"Status code is 204 Delete\", function () {",
+							"    pm.response.to.have.status(204);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://0.0.0.0:8000/api/recipes/{{recipe_id}}",
+					"protocol": "http",
+					"host": [
+						"0",
+						"0",
+						"0",
+						"0"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"recipes",
+						"{{recipe_id}}"
+					]
+				},
+				"description": "deletes a recipe base on the recipe_id given"
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

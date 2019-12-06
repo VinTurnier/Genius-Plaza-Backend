@@ -24,7 +24,7 @@ class RecipeSerializer(serializers.ModelSerializer):
     steps = StepSerializer(many=True)
     class Meta:
         model = Recipe
-        fields = ['name','ingredients','steps']
+        fields = ['id','name','ingredients','steps']
 
 
     def create(self, validated_data):
